@@ -1,0 +1,23 @@
+footer {
+    position: fixed;
+    bottom: 0;
+}
+
+form {
+    margin-bottom: 8px;
+}
+
+.login-wrapper {
+    padding-top: 64px;
+}
+
+.login-wrapper h1 a {
+    color: #FFFFFF;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.login-wrapper h1 a:hover,
+.login-wrapper h1 a:focus {
+    text-decoration: none;
+}
