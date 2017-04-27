@@ -36,9 +36,16 @@ footer {
 
 .cover .btn {
     color: #FFFFFF;
+    background-color: #B71C1C;
     border: 2px solid #FFFFFF;
     font-size: 16px;
     font-weight: bold;
+}
+
+.cover .btn:hover,
+.cover .btn:focus { 
+    color: #B71C1C;
+    background-color: #FFFFFF;
 }
 
 #start {
