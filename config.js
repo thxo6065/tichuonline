@@ -4,7 +4,8 @@ module.exports = {
         host: "nas.gihwan.me",
         port: 13306,
         user: "tichuonline",
-        password: "root"
+        password: "root",
+        database: "tichuonline"
     }
 
 };
