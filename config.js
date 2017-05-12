@@ -1,9 +1,9 @@
 module.exports = {
     
     mariadb: {
-        hostname: "nas.gihwan.me",
+        host: "nas.gihwan.me",
         port: 13306,
-        username: "tichuonline",
+        user: "tichuonline",
         password: "root"
     }
 
