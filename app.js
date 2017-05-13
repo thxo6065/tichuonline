@@ -1,9 +1,12 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 var config = require('./config');
 var mariadb = require('./database/mariadb');
@@ -30,6 +33,14 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: 'secrert-key',
+  resave: false,
+  saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 app.use('/', cover);
 app.use('/login', login);
@@ -55,5 +66,8 @@ app.use(function (err, req, res, next) {
 });
 
 mariadb.init(config);
+
+var initPassport = require('./init/passport');
+initPassport(app, passport);
 
 module.exports = app;
