@@ -33,6 +33,13 @@
             </div>
 
             <div class="col-lg-offset-4 col-lg-4 col-xs-offset-2 col-xs-8">
+
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-warning text-center">
+                        <%=message%>
+                    </div>
+                <% } %>
+
                 <form action="/login" method="POST">
                     <div class="form-group">
                         <label for="email">Email</label>
