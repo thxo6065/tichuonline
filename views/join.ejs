@@ -33,10 +33,19 @@
             </div>
 
             <div class="col-lg-offset-4 col-lg-4 col-xs-offset-2 col-xs-8">
+
+                <% if (message.length > 0) { %>
+                    <div class="alert alert-warning alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <p class="text-center"><%=message%></p>
+                    </div>
+                <% } %>
+
                 <form action="/join" method="POST">
-                    <div class="form-group">
+                    <div id="email-form-group" class="form-group has-feedback">
                         <label for="email">Email</label>
-                        <input id="email" type="email" class="form-control" name="email">
+                        <input id="email" type="email" class="form-control" name="email" onchange="onChange()">
+                        <span id="email-feedback" class="glyphicon form-control-feedback" aria-hidden="true"></span>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
@@ -62,6 +71,32 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script>
+        function onChange() {
+            var email = $('#email').val();
+
+            $.get("/join/find/" + email, function(data, status) {
+                if (data) {
+                    var $emailFormGroup = $('#email-form-group');
+                    var $emailFeedback = $('#email-feedback');
+
+                    if (data.exists) {
+                        $emailFormGroup.removeClass('has-success');
+                        $emailFeedback.removeClass('glyphicon-ok');
+
+                        $emailFormGroup.addClass('has-error');
+                        $emailFeedback.addClass('glyphicon-remove');
+                    } else {
+                        $emailFormGroup.removeClass('has-error');
+                        $emailFeedback.removeClass('glyphicon-remove');
+
+                        $emailFormGroup.addClass('has-success');
+                        $emailFeedback.addClass('glyphicon-ok');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
