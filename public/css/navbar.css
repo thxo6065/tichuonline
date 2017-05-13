@@ -1,0 +1,45 @@
+.navbar-red .navbar-brand {
+    color: rgba(255, 255, 255, 1);
+}
+
+.navbar-red {
+    font-size: 14px;
+    background-color: rgba(183, 28, 28, 1);
+    border-bottom-width: 0px;
+}
+
+.navbar-red .navbar-nav>li>a {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(183, 28, 28, 1);
+}
+
+.navbar-red .navbar-nav>li>a:hover,
+.navbar-red .navbar-nav>li>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar-red .navbar-nav>.active>a,
+.navbar-red .navbar-nav>.active>a:hover,
+.navbar-red .navbar-nav>.active>a:focus {
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.navbar-red .navbar-toggle {
+    border-color: #ffffff;
+}
+
+.navbar-red .navbar-toggle:hover,
+.navbar-red .navbar-toggle:focus {
+    background-color: #ffffff;
+}
+
+.navbar-red .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+
+.navbar-red .navbar-toggle:hover .icon-bar,
+.navbar-red .navbar-toggle:focus .icon-bar {
+    background-color: #b71c1c;
+}
