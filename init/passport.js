@@ -1,4 +1,5 @@
 var local_login = require('../passport/local/login');
+var local_join = require('../passport/local/join');
 
 module.exports = function (app, passport) {
 
@@ -17,4 +18,5 @@ module.exports = function (app, passport) {
     });
 
     passport.use('local-login', local_login);
+    passport.use('local-join', local_join);
 };
