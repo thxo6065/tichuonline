@@ -9,11 +9,11 @@ var passport = require('passport');
 var flash = require('connect-flash');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
 
-var cover = require('./routes/cover');
 var login = require('./routes/login');
 var join = require('./routes/join');
+
+var lobby = require('./routes/lobby');
 
 var app = express();
 
@@ -39,10 +39,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-app.use('/', cover);
+app.use('/', index);
+
 app.use('/login', login);
 app.use('/join', join);
-app.use('/users', users);
+
+app.use('/lobby', lobby);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

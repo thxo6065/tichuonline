@@ -4,10 +4,14 @@ var findAccount = require('../account/find');
 
 var router = express.Router();
 
-router.get('/', function (req, res, next) {
-    res.render('join', {
-        message: req.flash('joinMessage')
-    });
+router.get('/', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.redirect('/');
+    } else {
+        res.render('join', {
+            message: req.flash('joinMessage')
+        });
+    }
 });
 
 router.post('/', passport.authenticate('local-join', {
