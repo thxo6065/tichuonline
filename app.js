@@ -14,10 +14,10 @@ var login = require('./routes/login');
 var join = require('./routes/join');
 
 var lobby = require('./routes/lobby');
+var game = require('./routes/game');
+
 var profile = require('./routes/profile');
 
-var play = require('./routes/play');
-var create = require('./routes/create');
 var app = express();
 
 // view engine setup
@@ -48,9 +48,9 @@ app.use('/login', login);
 app.use('/join', join);
 
 app.use('/lobby', lobby);
+app.use('/game', game);
+
 app.use('/profile', profile);
-app.use('/play', play);
-app.use('/create', create);
 
 // app.use('/create', create);
 // catch 404 and forward to error handler
