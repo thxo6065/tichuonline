@@ -1,6 +1,6 @@
 var mariadb = require('../database/mariadb');
 
-module.exports = function (email, password, callback) {
+module.exports = function (user, callback) {
     mariadb.get(function (err, con) {
         if (err) {
             if (con) {
@@ -12,8 +12,9 @@ module.exports = function (email, password, callback) {
 
         var sql = "INSERT INTO account SET ?";
         var data = {
-            email: email,
-            password: password
+            email: user.email,
+            password: user.password,
+            username: user.username
         };
 
         var exec = con.query(sql, data, function (err, result) {
