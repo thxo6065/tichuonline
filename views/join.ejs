@@ -30,19 +30,26 @@
             <% } %>
 
             <form action="/join" method="POST">
-                <div id="email-form-group" class="form-group has-feedback">
+
+                <div class="form-group has-feedback" id="email-form-group">
                     <label for="email">Email</label>
-                    <input id="email" type="email" class="form-control" name="email" onchange="onChange()">
-                    <span id="email-feedback" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                    <input type="email" class="form-control" id="email" name="email" required autofocus
+                           onchange="checkEmail()">
+                    <span class="glyphicon form-control-feedback" id="email-feedback" aria-hidden="true"></span>
                 </div>
+
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input id="password" type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <div class="form-group">
-                    <label for="password-check">Check Password</label>
-                    <input id="password-check" type="password" class="form-control" name="password-check">
+
+                <div class="form-group has-feedback" id="username-form-group">
+                    <label for="username">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required
+                           onchange="checkUsername()">
+                    <span class="glyphicon form-control-feedback" id="username-feedback" aria-hidden="true"></span>
                 </div>
+
                 <button type="submit" class="btn btn-borderless btn-block">회원 가입</button>
             </form>
 
@@ -59,29 +66,93 @@
 
 <% include common/js.ejs %>
 <script>
-    function onChange() {
+    var isValidEmail = false;
+    var isValidUsername = false;
+
+    function checkEmail() {
         var email = $('#email').val();
+        if (!email) {
+            invalidateEmail();
+            return;
+        }
 
-        $.get("/join/find/" + email, function (data, status) {
-            if (data) {
-                var $emailFormGroup = $('#email-form-group');
-                var $emailFeedback = $('#email-feedback');
+        $.get("/join/find/email/" + email, function (data, status) {
+            if (!data) {
+                invalidateEmail();
+                return;
+            }
 
-                if (data.exists) {
-                    $emailFormGroup.removeClass('has-success');
-                    $emailFeedback.removeClass('glyphicon-ok');
-
-                    $emailFormGroup.addClass('has-error');
-                    $emailFeedback.addClass('glyphicon-remove');
-                } else {
-                    $emailFormGroup.removeClass('has-error');
-                    $emailFeedback.removeClass('glyphicon-remove');
-
-                    $emailFormGroup.addClass('has-success');
-                    $emailFeedback.addClass('glyphicon-ok');
-                }
+            if (data.exists) {
+                invalidateEmail();
+            } else {
+                validateEmail();
             }
         });
+    }
+
+    function checkUsername() {
+        var username = $('#username').val();
+        if (!username) {
+            invalidateUsername();
+            return;
+        }
+
+        $.get("/join/find/username/" + username, function (data, status) {
+            if (!data) {
+                invalidateUsername();
+                return;
+            }
+
+            if (data.exists) {
+                invalidateUsername();
+            } else {
+                validateUsername();
+            }
+        });
+    }
+
+    function validateEmail() {
+        var $emailFormGroup = $('#email-form-group');
+        var $emailFeedback = $('#email-feedback');
+
+        isValidEmail = true;
+        $emailFormGroup.removeClass('has-error');
+        $emailFeedback.removeClass('glyphicon-remove');
+        $emailFormGroup.addClass('has-success');
+        $emailFeedback.addClass('glyphicon-ok');
+    }
+
+    function invalidateEmail() {
+        var $emailFormGroup = $('#email-form-group');
+        var $emailFeedback = $('#email-feedback');
+
+        isValidEmail = false;
+        $emailFormGroup.removeClass('has-success');
+        $emailFeedback.removeClass('glyphicon-ok');
+        $emailFormGroup.addClass('has-error');
+        $emailFeedback.addClass('glyphicon-remove');
+    }
+
+    function validateUsername() {
+        var $usernameFormGroup = $('#username-form-group');
+        var $usernameFeedback = $('#username-feedback');
+
+        isValidUsername = true;
+        $usernameFormGroup.removeClass('has-error');
+        $usernameFeedback.removeClass('glyphicon-remove');
+        $usernameFormGroup.addClass('has-success');
+        $usernameFeedback.addClass('glyphicon-ok');
+    }
+
+    function invalidateUsername() {
+        var $usernameFormGroup = $('#username-form-group');
+        var $usernameFeedback = $('#username-feedback');
+
+        isValidUsername = false;
+        $usernameFormGroup.removeClass('has-success');
+        $usernameFeedback.removeClass('glyphicon-ok');
+        $usernameFormGroup.addClass('has-error');
+        $usernameFeedback.addClass('glyphicon-remove');
     }
 </script>
 </body>

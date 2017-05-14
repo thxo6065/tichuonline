@@ -3,31 +3,40 @@ var mariadb = require('../../database/mariadb');
 
 var findAccount = require('../../account/find');
 var insertAccount = require('../../account/insert');
+var findUsername = require('../../username/find');
 
-function doJoin(email, password, callback) {
-    findAccount(email, function (err, exists) {
+function doJoin(user, callback) {
+    findAccount(user.email, function (err, exists) {
         if (err) {
-            console.log("Failed to find account. email=" + email);
-            console.error(err);
-
+            console.log("Failed to find account. email=" + user.email);
             callback(err);
             return;
         }
-
         if (exists) {
             callback(null, null);
-        } else {
-            insertAccount(email, password, function (err) {
-                if (err) {
-                    console.log("Failed to insert account. email=" + email);
-                    console.error(err);
+            return;
+        }
 
+        findUsername(user.username, function (err, exists) {
+            if (err) {
+                console.log("Failed to find username. username=" + user.username);
+                callback(err);
+                return;
+            }
+            if (exists) {
+                callback(null, null);
+                return;
+            }
+
+            insertAccount(user, function (err) {
+                if (err) {
+                    console.log("Failed to insert account. email=" + user.email);
                     callback(err);
                 } else {
-                    callback(null, email);
+                    callback(null, user);
                 }
             });
-        }
+        });
     });
 }
 
@@ -36,7 +45,11 @@ module.exports = new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, email, password, done) {
-    doJoin(email, password, function (err, user) {
+    doJoin({
+        email: email,
+        password: password,
+        username: req.body['username']
+    }, function (err, user) {
         if (err) {
             return done(err);
         }

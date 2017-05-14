@@ -1,6 +1,6 @@
 var mariadb = require('../database/mariadb');
 
-module.exports = function (user, callback) {
+module.exports = function (username, callback) {
     mariadb.get(function (err, con) {
         if (err) {
             if (con) {
@@ -10,23 +10,19 @@ module.exports = function (user, callback) {
             return;
         }
 
-        var sql = "INSERT INTO account SET ?";
-        var data = {
-            email: user.email,
-            password: user.password,
-            username: user.username
-        };
+        var sql = "SELECT username FROM account WHERE username=?";
+        var data = [username];
 
         var exec = con.query(sql, data, function (err, result) {
             if (con) {
                 con.release();
             }
-            console.log("[insertAccount] SQL : " + exec.sql);
+            console.log("[findUsername] SQL : " + exec.sql);
 
             if (err) {
                 callback(err);
             } else {
-                callback(null);
+                callback(null, (result.length > 0));
             }
         });
     });

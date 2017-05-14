@@ -10,7 +10,7 @@ function doLogin(email, password, callback) {
             return;
         }
 
-        var sql = "SELECT id, email FROM account WHERE email=? AND password=?";
+        var sql = "SELECT id, email, username FROM account WHERE email=? AND password=?";
         var data = [email, password];
 
         var exec = con.query(sql, data, function (err, result) {
@@ -22,8 +22,9 @@ function doLogin(email, password, callback) {
             } else {
                 if (result.length > 0) {
                     callback(null, {
-                        id: result.id,
-                        email: result.email
+                        id: result[0].id,
+                        email: result[0].email,
+                        username: result[0].username
                     });
                 } else {
                     callback(null, null);
@@ -31,7 +32,7 @@ function doLogin(email, password, callback) {
             }
         });
     });
-};
+}
 
 module.exports = new LocalStrategy({
     usernameField: 'email',
