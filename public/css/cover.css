@@ -1,3 +1,9 @@
+html,
+body {
+    color: #FFFFFF;
+    background-color: #B71C1C;
+}
+
 footer {
     position: fixed;
     bottom: 0;
@@ -26,4 +32,16 @@ footer {
 #start {
     margin: 32px;
     padding: 8px 16px;
+}
+
+.btn-borderless {
+    color: #FFFFFF;
+    background-color: #B71C1C;
+    border: 2px solid #FFFFFF;
+}
+
+.btn-borderless:hover,
+.btn-borderless:focus {
+    color: #B71C1C;
+    background-color: #FFFFFF;
 }
