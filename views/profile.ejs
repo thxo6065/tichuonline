@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include common/meta.ejs %>
+    <% include common/css.ejs %>
+
+    <title>Tichu Online - <%= user.username %></title>
+    <!-- Custom style -->
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/button.css">
+</head>
+
+<body>
+<nav class="navbar navbar-red navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Tichu Online</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/profile">프로필</a></li>
+                <li><a href="/logout">로그아웃</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<footer>
+    <div class="container">
+        <p class="text-center">Made by Illisia.</p>
+    </div>
+</footer>
+
+<% include common/js.ejs %>
+</body>
+
+</html>

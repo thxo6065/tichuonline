@@ -12,27 +12,31 @@ function doJoin(user, callback) {
             callback(err);
             return;
         }
-
         if (exists) {
             callback(null, null);
-        } else {
-            findUsername(user.username, function (err, exists) {
-                if (err) {
-                    console.log("Failed to find username. username=" + user.username);
-                    callback(err);
-                    return;
-                }
-
-                insertAccount(user, function (err) {
-                    if (err) {
-                        console.log("Failed to insert account. email=" + user.email);
-                        callback(err);
-                    } else {
-                        callback(null, user);
-                    }
-                });
-            });
+            return;
         }
+
+        findUsername(user.username, function (err, exists) {
+            if (err) {
+                console.log("Failed to find username. username=" + user.username);
+                callback(err);
+                return;
+            }
+            if (exists) {
+                callback(null, null);
+                return;
+            }
+
+            insertAccount(user, function (err) {
+                if (err) {
+                    console.log("Failed to insert account. email=" + user.email);
+                    callback(err);
+                } else {
+                    callback(null, user);
+                }
+            });
+        });
     });
 }
 
