@@ -12,20 +12,20 @@
     border-bottom-width: 0px;
 }
 
-.navbar-red .navbar-nav>li>a {
+.navbar-red .navbar-nav > li > a {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(183, 28, 28, 1);
 }
 
-.navbar-red .navbar-nav>li>a:hover,
-.navbar-red .navbar-nav>li>a:focus {
+.navbar-red .navbar-nav > li > a:hover,
+.navbar-red .navbar-nav > li > a:focus {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(255, 255, 255, 0.25);
 }
 
-.navbar-red .navbar-nav>.active>a,
-.navbar-red .navbar-nav>.active>a:hover,
-.navbar-red .navbar-nav>.active>a:focus {
+.navbar-red .navbar-nav > .active > a,
+.navbar-red .navbar-nav > .active > a:hover,
+.navbar-red .navbar-nav > .active > a:focus {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(255, 255, 255, 0.25);
 }
