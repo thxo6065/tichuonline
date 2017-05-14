@@ -15,6 +15,8 @@ var join = require('./routes/join');
 
 var lobby = require('./routes/lobby');
 
+var play = require('./routes/play');
+var create = require('./routes/create');
 var app = express();
 
 // view engine setup
@@ -45,7 +47,9 @@ app.use('/login', login);
 app.use('/join', join);
 
 app.use('/lobby', lobby);
-
+app.use('/play', play);
+app.use('/create', create);
+// app.use('/create', create);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   var err = new Error('Not Found');
