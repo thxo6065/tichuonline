@@ -6,6 +6,10 @@ module.exports = {
         user: "tichuonline",
         password: "root",
         database: "tichuonline"
+    },
+
+    mongodb: {
+        url: "mongodb://nas.gihwan.me:27017"
     }
 
 };
