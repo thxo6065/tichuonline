@@ -1,5 +1,5 @@
 var mariadb = require('../database/mariadb');
-var room = require('../database/room');
+var Room = require('../database/room');
 var config = require('../config');
 
 module.exports = function (app) {
@@ -13,5 +13,5 @@ module.exports = function (app) {
         }
     });
 
-    room.connect(config.mongodb);
+    Room.connect(config.mongodb);
 };
