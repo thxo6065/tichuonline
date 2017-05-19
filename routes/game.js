@@ -4,7 +4,11 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     if (req.isAuthenticated()) {
-        res.render('play');
+        var id = req.params.id;
+
+        res.render('play', {
+            id: id
+        });
     } else {
         res.redirect('/login');
     }
@@ -23,7 +27,7 @@ router.post('/create', function (req, res) {
                 res.status(500).end();
             } else {
                 console.log("Room is created. room : " + room);
-                res.redirect('/game');
+                res.redirect('/game?id=' + room._id);
             }
         });
     } else {
