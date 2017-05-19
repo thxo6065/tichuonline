@@ -1,4 +1,5 @@
 var mariadb = require('../database/mariadb');
+var Room = require('../database/room');
 var config = require('../config');
 
 module.exports = function (app) {
@@ -11,4 +12,6 @@ module.exports = function (app) {
             console.log("MariaDB connection pool is created.");
         }
     });
+
+    Room.connect(config.mongodb);
 };

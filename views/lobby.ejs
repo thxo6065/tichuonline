@@ -49,6 +49,20 @@
     </div>
 </div>
 
+<% if (rooms.length > 0) { %>
+<div class="container">
+    <div class="list-group">
+        <% for (var i = 0; i < rooms.length; i++) { %>
+        <% var id = rooms[i]._id %>
+        <% var title = rooms[i].title %>
+        <a href="/game?id=<%= id %>" class="list-group-item">
+            <h3><%= title %></h3>
+        </a>
+        <% } %>
+    </div>
+</div>
+<% } %>
+
 <footer>
     <div class="container">
         <p class="text-center">Made by Illisia.</p>
@@ -58,17 +72,17 @@
 <div id="create-game-modal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form class="form-horizontal" action="/create" method="POST">
+            <form action="/game/create" method="POST" class="form-horizontal">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title text-center">방 만들기</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="room-name" class="col-sm-2 control-label">제목</label>
+                        <label for="title" class="col-sm-2 control-label">제목</label>
                         <div class="col-sm-10">
-                            <input type="text" name="room_name" class="form-control" id="room-name" placeholder="방 제목"
-                                   autofocus>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="방 제목"
+                                   required autofocus>
                         </div>
                     </div>
                 </div>
